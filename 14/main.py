@@ -87,18 +87,16 @@ cave_hor = set()
 for rock_point in rock_points:
     cave_hor.add(rock_point[0])
     cave_vert.add(rock_point[1])
-# Use the lowest horizontal coordinate as initial offset
-offset = min(cave_hor)
 # Initialise cave map
 cave_map = []
 for i in range(0, max(cave_vert) + 2):
     column = []
-    for j in range(offset, max(cave_hor) + 1):
+    for j in range(min(cave_hor), max(cave_hor) + 1):
         column.append(".")
     cave_map.append(column)
 # Add rock points to cave map
 for rock_point in rock_points:
-    point_hor = rock_point[0] - offset
+    point_hor = rock_point[0] - min(cave_hor)
     point_vert = rock_point[1]
     cave_map[point_vert][point_hor] = "#"
 
